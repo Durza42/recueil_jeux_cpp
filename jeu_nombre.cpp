@@ -1,7 +1,8 @@
+
 using namespace std;
 
 
-bool continue_programe (int& reponse_joueur, int& nb_mystere);
+bool continue_programe (const int reponse_joueur, const int nb_mystere);
 bool a_gagne (const int reponse_joueur, const int nombre_mystere);
 bool plus_petit (const int reponse_joueur, const int nombre_mystere);
 bool plus_grand (const int reponse_joueur, const int nombre_mystere);
@@ -10,17 +11,9 @@ int demander_max ();
 int gen_nb_mystere (bool nb_j_is_2);
 
 
-
 int jeu_nombre (bool nb_joueurs_is_2 = false);
 
 int jeu_nombre (bool nb_joueurs_is_2) {
-
-   srand (time (0));
-
-   int nb_mystere (0);
-   int reponse_joueur (0);
-
-   int compteur_de_coups (0);
 
       /* instructions */
    cout << endl << endl;
@@ -36,6 +29,8 @@ int jeu_nombre (bool nb_joueurs_is_2) {
 
 
    bool jouer (true), gagne (false);
+   int nb_mystere (0), reponse_joueur (0);
+   int compteur_de_coups (0);
 
    while (jouer) {
 
@@ -53,6 +48,7 @@ int jeu_nombre (bool nb_joueurs_is_2) {
 
          gagne = !continue_programe (reponse_joueur, nb_mystere); // si on doit s'arêter là (le joueur a trouvé le nombre)
       }
+
       jouer = rejouer ();
       gagne = false;
       cout << endl;
@@ -62,8 +58,7 @@ int jeu_nombre (bool nb_joueurs_is_2) {
    return EXIT_SUCCESS;
 }
 
-
-bool continue_programe (int& reponse_joueur, int& nb_mystere) {
+bool continue_programe (const int reponse_joueur, const int nb_mystere) {
    if (a_gagne (reponse_joueur, nb_mystere)) {
       cout << endl << "bravo, vous avez gagne !" << endl << endl << endl;
       return false;
@@ -83,8 +78,6 @@ bool continue_programe (int& reponse_joueur, int& nb_mystere) {
    return true;
 }
 
-
-
 bool a_gagne (const int reponse_joueur, const int nombre_mystere) {
    return (reponse_joueur == nombre_mystere);
 }
@@ -96,7 +89,6 @@ bool plus_grand (const int reponse_joueur, const int nombre_mystere) {
 bool plus_petit (const int reponse_joueur, const int nombre_mystere) {
    return (nombre_mystere < reponse_joueur);
 }
-
 
 bool rejouer () {
    cout << "voulez-vous rejouer ? Tapez o pour oui ou n pour non :" << endl;
@@ -111,7 +103,6 @@ bool rejouer () {
       return false;
 }
 
-
 int demander_max () {
    cout << "entrez le nombre maximal que pourra vous donner l'ordinateur :" << endl << ">> ";
 
@@ -120,7 +111,6 @@ int demander_max () {
 
    return reponse;
 }
-
 
 int gen_nb_mystere (bool nb_j_is_2) {
 
@@ -145,10 +135,5 @@ int gen_nb_mystere (bool nb_j_is_2) {
       }
    }
       // retour par defaut
-   return rand () % demander_max ();
+   return rd () % demander_max ();
 }
-
-
-
-
-

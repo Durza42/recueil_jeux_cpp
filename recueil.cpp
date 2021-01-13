@@ -3,18 +3,14 @@
 #include <fstream> // permet la gestion des flux vers et depuis les fichiers
 #include <string> // permet d'utiliser les chaines de charactère dans des variables
 #include <cmath>
-
-
+#include <random> // nombres aléatoires
 
 using namespace std;
-
-
 
 
 void affiche_menu ();
 void netoit_ecran ();
 bool nb_j_is_2 ();
-
 
 
 #include "pendu.cpp"
@@ -25,6 +21,8 @@ bool nb_j_is_2 ();
 
 
 int main () {
+
+   random_device rd {}; // création du générateur
 
       /* instructions */
    cout << endl << endl;
@@ -84,9 +82,6 @@ int main () {
    return EXIT_SUCCESS;
 }
 
-
-
-
 void affiche_menu () {
 
    cout << endl << endl;
@@ -105,8 +100,6 @@ void affiche_menu () {
    cout << "Pour choisir un jeu, vous pouvez soit entrer son numero soit entrer son nom :" << endl << ">> ";
 }
 
-
-
 void netoit_ecran () {
    for (unsigned int i = 0; i < 75; i += 1) {
       cout << endl;
@@ -115,9 +108,9 @@ void netoit_ecran () {
 
 bool nb_j_is_2 () {
 
-   string nb_j ("0");
-
    cout << "combien de joueurs etes vous ? (1 ou 2)" << endl;
+
+   string nb_j ("0");
 
    while (nb_j == "0") {
 
@@ -136,15 +129,3 @@ bool nb_j_is_2 () {
    }
    return false; // uniquement pour le compilateur
 }
-
-
-
-
-
-
-
-
-
-
-
-

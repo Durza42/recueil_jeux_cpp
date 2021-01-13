@@ -1,30 +1,28 @@
-using namespace std;
 
+using namespace std;
 
 string mm_gen_mot_mystere (bool nb_j_is_2);
 string melange_mot_mystere (string mot_mystere);
-bool mm_a_gagne (string& reponse_joueur, string& mot_mystere);
+bool mm_a_gagne (const string& reponse_joueur, const string& mot_mystere);
 
 
 int melange_mot (bool nb_joueurs_is_2 = false);
 
 int melange_mot (bool nb_joueurs_is_2) {
 
-   srand (time (0)); // pour la generation de nombres aléatoires
-
-   int nb_joueurs (1), nb_coups (0);
-
-   bool gagne (false);
-
-   string reponse_joueur ("");
-   string mot_mystere (""), mot_mystere_melange ("");
-
    cout << "entrez \"#quit\" pour quitter ou #perdu pour donner votre langue au chat. Ne mettez pas d'espaces lors de vos reponces, cela vous coutera un coup suplementaire ! Vous devez egalement entrer le mot en majuscule, sinon il ne sera pas detecte !" << endl;
+
+   string mot_mystere (""), mot_mystere_melange ("");
 
    mot_mystere = mm_gen_mot_mystere (nb_joueurs_is_2);
    if (nb_joueurs_is_2)
       netoit_ecran ();
    mot_mystere_melange = melange_mot_mystere (mot_mystere);
+
+
+   bool gagne (false);
+   int nb_coups (0);
+   string reponse_joueur ("");
 
    while (!gagne) {
 
@@ -40,9 +38,9 @@ int melange_mot (bool nb_joueurs_is_2) {
 
       cout << endl; // on retourne à la ligne
 
-      if (reponse_joueur == "#QUIT" || reponse_joueur == "#quit") { // commande #quit --> on quitte
+      if (reponse_joueur == "#QUIT" || reponse_joueur == "#quit") // commande #quit --> on quitte
          return 0;
-      }
+
       if (reponse_joueur == "#PERDU" || reponse_joueur == "#perdu") { // commande #quit --> on quitte
          cout << "voici le mot que vous deviez trouver : " << mot_mystere << ". Dommage..." << endl << endl;
          return 0;
@@ -59,10 +57,6 @@ int melange_mot (bool nb_joueurs_is_2) {
    return 0;
 }
 
-
-
-
-
 string mm_gen_mot_mystere (bool nb_j_is_2) {
 
    if (nb_j_is_2) {
@@ -77,7 +71,7 @@ string mm_gen_mot_mystere (bool nb_j_is_2) {
 
    ifstream dico ("dico.txt"); // mode lecture
 
-   dico.seekg (rand () % 3940127, ios::beg); // 3940127 : nombre de caractères du fichier en enlevant le dernier mot
+   dico.seekg (rd () % 3940127, ios::beg); // 3940127 : nombre de caractères du fichier en enlevant le dernier mot
 
    char caractere_act (' ');
 
@@ -94,7 +88,6 @@ string mm_gen_mot_mystere (bool nb_j_is_2) {
 
    return mot_genere;
 }
-
 
 string melange_mot_mystere (string mot_mystere) {
 
@@ -114,13 +107,6 @@ string melange_mot_mystere (string mot_mystere) {
    return mot_mystere_melange;
 }
 
-
-
-
-bool mm_a_gagne (string& reponse_joueur, string& mot_mystere) {
+bool mm_a_gagne (const string& reponse_joueur, const string& mot_mystere) {
    return (reponse_joueur == mot_mystere);
 }
-
-
-
-
