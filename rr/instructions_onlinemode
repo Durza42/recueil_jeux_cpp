@@ -1,0 +1,7 @@
+utilisation_online :
+
+1. lancer votre compilateur en ligne (ex.: https://repl.it)
+2. coller le fichier "recueil.cpp"
+3. RUN
+
+Les modes nessecitant une utilisation du dico.txt (pendu 1 joueur, melange_mot 1 joueur) ne seront pas opérationnels.
