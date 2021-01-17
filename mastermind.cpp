@@ -1,8 +1,6 @@
 
-using namespace std;
-
-string gen_code_mystere (bool nb_j_is_2);
-string reaction (const string& reponce_joueur, const string& code_mystere);
+std::string gen_code_mystere (bool nb_j_is_2);
+std::string reaction (const std::string& reponce_joueur, const std::string& code_mystere);
 bool code_pas_ok (const char code);
 
 
@@ -10,23 +8,23 @@ int mastermind (bool nb_joueurs_is_2 = false);
 
 int mastermind (bool nb_joueurs_is_2) {
 
-   string reponse_joueur;
-   string code_mystere;
-   string out;
+   std::string reponse_joueur;
+   std::string code_mystere;
+   std::string out;
 
 
       /* instructions */
-   cout << endl << endl;
-   cout << "----------------------------------" << endl;
-   cout << "|  vous etes dans le mastermind  |" << endl;
-   cout << "----------------------------------" << endl;
-   cout << endl << endl;
-   cout << "L'ordinateur va tirer un code de quatre chiffres au hasard entre 1 et 8 compris, et vous devrez le deviner." << endl << endl;
-   cout << "Pour cela, vous proposerez un code et pour chaque chiffre, l'ordinateur vous anoncera :" << endl << endl;
+   std::cout << std::endl << std::endl;
+   std::cout << "----------------------------------" << std::endl;
+   std::cout << "|  vous etes dans le mastermind  |" << std::endl;
+   std::cout << "----------------------------------" << std::endl;
+   std::cout << std::endl << std::endl;
+   std::cout << "L'ordinateur va tirer un code de quatre chiffres au hasard entre 1 et 8 compris, et vous devrez le deviner." << std::endl << std::endl;
+   std::cout << "Pour cela, vous proposerez un code et pour chaque chiffre, l'ordinateur vous anoncera :" << std::endl << std::endl;
 
-   cout << " - une croix (x) qui signifiera que ce chiffre n'est pas dans le code mystere." << endl;
-   cout << " - un tilde (~) qui signifiera que ce chiffre est present dans le code mystere, mais pas a cet emplacement." << endl;
-   cout << " - un diese (#) qui signifiera que ce chiffre est present dans le code mystere, et a cet emplacement. Il pourra cependant etre egalement a un autre emplacement du code mystere." << endl << endl;
+   std::cout << " - une croix (x) qui signifiera que ce chiffre n'est pas dans le code mystere." << std::endl;
+   std::cout << " - un tilde (~) qui signifiera que ce chiffre est present dans le code mystere, mais pas a cet emplacement." << std::endl;
+   std::cout << " - un diese (#) qui signifiera que ce chiffre est present dans le code mystere, et a cet emplacement. Il pourra cependant etre egalement a un autre emplacement du code mystere." << std::endl << std::endl;
 
    code_mystere = gen_code_mystere (nb_joueurs_is_2);
    if (nb_joueurs_is_2)
@@ -39,38 +37,38 @@ int mastermind (bool nb_joueurs_is_2) {
 
       // nouveau tour
 
-      nb_coups += 1;
+      nb_coups++;
 
-      cout << "vous en etes au coup numero " << nb_coups << ". " << endl; // on parle à l'utilisateur
-      cout << "Proposez un code :" << endl; // on parle à l'utilisateur
-      cout << ">> "; // on lui laisse le relai
+      std::cout << "vous en etes au coup numero " << nb_coups << ". " << std::endl; // on parle à l'utilisateur
+      std::cout << "Proposez un code :" << std::endl; // on parle à l'utilisateur
+      std::cout << ">> "; // on lui laisse le relai
 
-      cin >> reponse_joueur; // on récupère les datas
+      std::cin >> reponse_joueur; // on récupère les datas
 
-      cout << endl; // on retourne à la ligne
+      std::cout << std::endl; // on retourne à la ligne
 
       out = reaction (reponse_joueur, code_mystere); // on affiche la reponse du programe. Par exemple : x~##
 
       if (out == "   ####")
          return EXIT_SUCCESS;
 
-      cout << out << endl << endl;
+      std::cout << out << std::endl << std::endl;
    }
 }
 
-string gen_code_mystere (bool nb_j_is_2) {
+std::string gen_code_mystere (bool nb_j_is_2) {
 
    if (nb_j_is_2) {
 
-      cout << "choisisez le code que votre adversaire devra deviner :" << endl;
+      std::cout << "choisisez le code que votre adversaire devra deviner :" << std::endl;
 
-      string code ("0");
+      std::string code ("0");
 
       while (code == "0") {
 
-         cout << ">> ";
+         std::cout << ">> ";
 
-         cin >> code;
+         std::cin >> code;
 
          if (code.size () != 4 ||  code_pas_ok (code [0]) ||  code_pas_ok (code [1]) ||  code_pas_ok (code [2]) ||  code_pas_ok (code [3])) {
             code = "0";
@@ -79,16 +77,16 @@ string gen_code_mystere (bool nb_j_is_2) {
             return code;
          }
 
-         cout << "merci d'entrer un code de 4 chiffres compose de nombres entiers entre 1 et 8 :" << endl;
+         std::cout << "merci d'entrer un code de 4 chiffres compose de nombres entiers entre 1 et 8 :" << std::endl;
       }
    }
 
-   string returned ("    ");
+   std::string returned ("    ");
    int alea (0);
 
-   default_random_engine rd {234}; // création du générateur
+   std::default_random_engine rd {234}; // création du générateur
 
-   for (unsigned int i = 0; i < 4; i += 1) {
+   for (std::size_t i = 0; i < 4; i++) {
       alea = rd () % 8 + 1;
 
       switch (alea) {
@@ -122,13 +120,13 @@ string gen_code_mystere (bool nb_j_is_2) {
    return returned;
 }
 
-string reaction (const string& reponce_joueur, const string& code_mystere) {
+std::string reaction (const std::string& reponce_joueur, const std::string& code_mystere) {
 
-   string returned ("   ");
-   unsigned short int j (0);
+   std::string returned ("   ");
+   std::size_t j (0);
    bool is_tilde (false);
 
-   for (unsigned short int i = 0; i < 4; i += 1) {
+   for (std::size_t i = 0; i < 4; i++) {
 
       is_tilde = false;
 
@@ -136,7 +134,7 @@ string reaction (const string& reponce_joueur, const string& code_mystere) {
          returned += "#";
       }
       else {
-         for (j = 0; j < 4 && !is_tilde; j += 1) {
+         for (j = 0; j < 4 && !is_tilde; j++) {
             if (reponce_joueur [i] == code_mystere [j]) { // bon chiffre, mauvais endroit
                returned += "~";
                is_tilde = true;
@@ -149,7 +147,7 @@ string reaction (const string& reponce_joueur, const string& code_mystere) {
    }
 
    if (returned == "   ####") // gagne, fin
-      cout << "Bravo, vous avez trouve le code mystere : " << code_mystere << " !" << endl << endl;
+      std::cout << "Bravo, vous avez trouve le code mystere : " << code_mystere << " !" << std::endl << std::endl;
 
    return returned;
 }

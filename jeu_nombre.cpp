@@ -1,7 +1,4 @@
 
-using namespace std;
-
-
 bool continue_programe (const int reponse_joueur, const int nb_mystere);
 bool a_gagne (const int reponse_joueur, const int nombre_mystere);
 bool plus_petit (const int reponse_joueur, const int nombre_mystere);
@@ -16,16 +13,16 @@ int jeu_nombre (bool nb_joueurs_is_2 = false);
 int jeu_nombre (bool nb_joueurs_is_2) {
 
       /* instructions */
-   cout << endl << endl;
-   cout << "--------------------------------------" << endl;
-   cout << "|  vous etes dans le jeu du nombre.  |" << endl;
-   cout << "--------------------------------------" << endl;
-   cout << endl << endl;
-   cout << "L'ordinateur va tirer un nombre entre 1 et le nombre que vous alez entrer ci-dessous, et vous devrez le deviner." << endl;
-   cout << "Pour cela, vous proposerez un nombre, puis l'ordinateur vous répondra, selon le cas :" << endl;
-   cout << " - bravo, vous avez gagne !" << endl;
-   cout << " - plus grand" << endl;
-   cout << " - plus petit" << endl << endl << endl << endl;
+   std::cout << std::endl << std::endl;
+   std::cout << "--------------------------------------" << std::endl;
+   std::cout << "|  vous etes dans le jeu du nombre.  |" << std::endl;
+   std::cout << "--------------------------------------" << std::endl;
+   std::cout << std::endl << std::endl;
+   std::cout << "L'ordinateur va tirer un nombre entre 1 et le nombre que vous alez entrer ci-dessous, et vous devrez le deviner." << std::endl;
+   std::cout << "Pour cela, vous proposerez un nombre, puis l'ordinateur vous répondra, selon le cas :" << std::endl;
+   std::cout << " - bravo, vous avez gagne !" << std::endl;
+   std::cout << " - plus grand" << std::endl;
+   std::cout << " - plus petit" << std::endl << std::endl << std::endl << std::endl;
 
 
    bool jouer (true), gagne (false);
@@ -40,18 +37,18 @@ int jeu_nombre (bool nb_joueurs_is_2) {
          netoit_ecran ();
 
       while (!gagne) {
-         compteur_de_coups += 1;
+         compteur_de_coups++;
 
-         cout << "coup " << compteur_de_coups << ". proposez un nombre :" << endl << ">> ";
+         std::cout << "coup " << compteur_de_coups << ". proposez un nombre :" << std::endl << ">> ";
 
-         cin >> reponse_joueur;
+         std::cin >> reponse_joueur;
 
          gagne = !continue_programe (reponse_joueur, nb_mystere); // si on doit s'arêter là (le joueur a trouvé le nombre)
       }
 
       jouer = rejouer ();
       gagne = false;
-      cout << endl;
+      std::cout << std::endl;
       compteur_de_coups = 0;
    }
 
@@ -60,19 +57,19 @@ int jeu_nombre (bool nb_joueurs_is_2) {
 
 bool continue_programe (const int reponse_joueur, const int nb_mystere) {
    if (a_gagne (reponse_joueur, nb_mystere)) {
-      cout << endl << "bravo, vous avez gagne !" << endl << endl << endl;
+      std::cout << std::endl << "bravo, vous avez gagne !" << std::endl << std::endl << std::endl;
       return false;
    }
    else if (plus_petit (reponse_joueur, nb_mystere)) {
-      cout << "   plus petit." << endl << endl;
+      std::cout << "   plus petit." << std::endl << std::endl;
       return true;
    }
    else if (plus_grand (reponse_joueur, nb_mystere)) {
-      cout << "   plus grand." << endl << endl;
+      std::cout << "   plus grand." << std::endl << std::endl;
       return true;
    }
    else {
-      cout << "fatal error : votre nombre n'est ni trop petit, ni trop grand, ni egal. Je rapelle de ne pas rentrer de lettre." << endl;
+      std::cout << "fatal error : votre nombre n'est ni trop petit, ni trop grand, ni egal. Je rapelle de ne pas rentrer de lettre." << std::endl;
       exit (EXIT_FAILURE);
    }
    return true;
@@ -91,11 +88,11 @@ bool plus_petit (const int reponse_joueur, const int nombre_mystere) {
 }
 
 bool rejouer () {
-   cout << "voulez-vous rejouer ? Tapez o pour oui ou n pour non :" << endl;
-   cout << ">> ";
+   std::cout << "voulez-vous rejouer ? Tapez o pour oui ou n pour non :" << std::endl;
+   std::cout << ">> ";
 
-   string reponse ("n");
-   cin >> reponse;
+   std::string reponse ("n");
+   std::cin >> reponse;
    
    if (reponse == "o")
       return true;
@@ -104,10 +101,10 @@ bool rejouer () {
 }
 
 int demander_max () {
-   cout << "entrez le nombre maximal que pourra vous donner l'ordinateur :" << endl << ">> ";
+   std::cout << "entrez le nombre maximal que pourra vous donner l'ordinateur :" << std::endl << ">> ";
 
    int reponse (0);
-   cin >> reponse;
+   std::cin >> reponse;
 
    return reponse;
 }
@@ -118,24 +115,24 @@ int gen_nb_mystere (bool nb_j_is_2) {
 
       int nb (0);
 
-      cout << "choisisez le nombre que votre adversaire devra deviner :" << endl;
+      std::cout << "choisisez le nombre que votre adversaire devra deviner :" << std::endl;
 
       while (nb == 0) {
 
-         cout << ">> ";
+         std::cout << ">> ";
 
-         cin >> nb;
+         std::cin >> nb;
 
          if (nb % 1 != 0 || nb == 0)
             nb = 0;
          else
             return nb;
 
-         cout << "merci d'entrer un nombre entier superieur a 0 :" << endl;
+         std::cout << "merci d'entrer un nombre entier superieur a 0 :" << std::endl;
       }
    }
 
-   default_random_engine rd {234}; // création du générateur
+   std::default_random_engine rd {234}; // création du générateur
       // retour par defaut
    return rd () % demander_max ();
 }
