@@ -1,21 +1,14 @@
 
 using namespace std;
 
-
 string gen_code_mystere (bool nb_j_is_2);
-string reaction (string reponce_joueur, string code_mystere);
+string reaction (const string& reponce_joueur, const string& code_mystere);
 bool code_pas_ok (const char code);
 
 
 int mastermind (bool nb_joueurs_is_2 = false);
 
 int mastermind (bool nb_joueurs_is_2) {
-
-   srand (time (0)); // pour la generation de nombres aléatoires
-
-   int nb_joueurs (1), nb_coups (0);
-
-   bool gagne (false);
 
    string reponse_joueur;
    string code_mystere;
@@ -39,6 +32,9 @@ int mastermind (bool nb_joueurs_is_2) {
    if (nb_joueurs_is_2)
       netoit_ecran ();
 
+   int nb_coups (0);
+   bool gagne (false);
+
    while (1) {
 
       // nouveau tour
@@ -53,7 +49,7 @@ int mastermind (bool nb_joueurs_is_2) {
 
       cout << endl; // on retourne à la ligne
 
-      out = reaction (reponse_joueur, code_mystere); // on affiche la reponse du programe. Par exemple : _~##
+      out = reaction (reponse_joueur, code_mystere); // on affiche la reponse du programe. Par exemple : x~##
 
       if (out == "   ####")
          return EXIT_SUCCESS;
@@ -62,17 +58,13 @@ int mastermind (bool nb_joueurs_is_2) {
    }
 }
 
-
-
-
-
 string gen_code_mystere (bool nb_j_is_2) {
 
    if (nb_j_is_2) {
 
-      string code ("0");
-
       cout << "choisisez le code que votre adversaire devra deviner :" << endl;
+
+      string code ("0");
 
       while (code == "0") {
 
@@ -80,12 +72,7 @@ string gen_code_mystere (bool nb_j_is_2) {
 
          cin >> code;
 
-         if (     code.size () != 4
-              ||  code_pas_ok (code [0])
-              ||  code_pas_ok (code [1])
-              ||  code_pas_ok (code [2])
-              ||  code_pas_ok (code [3])
-            ) {
+         if (code.size () != 4 ||  code_pas_ok (code [0]) ||  code_pas_ok (code [1]) ||  code_pas_ok (code [2]) ||  code_pas_ok (code [3])) {
             code = "0";
          }
          else {
@@ -99,9 +86,10 @@ string gen_code_mystere (bool nb_j_is_2) {
    string returned ("    ");
    int alea (0);
 
+   default_random_engine rd {234}; // création du générateur
+
    for (unsigned int i = 0; i < 4; i += 1) {
-         /* rand risque de donner des résultats trop proches, tels que 8678 ou 1221 */
-      alea = clock () % 8 + 1;
+      alea = rd () % 8 + 1;
 
       switch (alea) {
          case 1:
@@ -134,8 +122,7 @@ string gen_code_mystere (bool nb_j_is_2) {
    return returned;
 }
 
-
-string reaction (string reponce_joueur, string code_mystere) {
+string reaction (const string& reponce_joueur, const string& code_mystere) {
 
    string returned ("   ");
    unsigned short int j (0);
@@ -167,9 +154,6 @@ string reaction (string reponce_joueur, string code_mystere) {
    return returned;
 }
 
-
-
-
 bool code_pas_ok (const char code) {
 
    return (    code != '1'
@@ -183,12 +167,3 @@ bool code_pas_ok (const char code) {
                && code != '8'
           );
 }
-
-
-
-
-
-
-
-
-
