@@ -89,32 +89,9 @@ std::string gen_code_mystere (bool nb_j_is_2) {
    for (std::size_t i = 0; i < 4; i++) {
       alea = rd () % 8 + 1;
 
-      switch (alea) {
-         case 1:
-            returned [i] = '1';
-        break;
-         case 2:
-            returned [i] = '2';
-        break;
-         case 3:
-            returned [i] = '3';
-        break;
-         case 4:
-            returned [i] = '4';
-        break;
-         case 5:
-            returned [i] = '5';
-        break;
-         case 6:
-            returned [i] = '6';
-        break;
-         case 7:
-            returned [i] = '7';
-        break;
-         case 8:
-            returned [i] = '8';
-        break;
-      }
+      returned [i] = alea + 48; // in the ascii table, 0 = 48, 1 = 49, 2 = 50 ... 9 = 57.
+
+      std::cout << "return : " << returned [i] << std::endl;
    }
 
    return returned;

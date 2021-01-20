@@ -82,22 +82,26 @@ std::string gen_mot_mystere (bool nb_j_is_2) {
 
    std::ifstream dico ("dico.txt"); // mode lecture
 
+   vector <string> contenu_fichier;
+
+   dico.ignore ();
+
+   unsigned long int taille_fichier = 0;
+
+   while (dico.get () != EOF) {
+      while (dico.get () != '\n');
+      taille_fichier++;
+   }
+
+   for (unsigned int i = 0 ; i < taille_fichier ; ++i) {
+      contenu_fichier.push_back ();
+      getline (dico, contenu_fichier [i]);
+   }
+
    std::default_random_engine rd {234}; // création du générateur
 
-   dico.seekg (rd () % 3940127, std::ios::beg);
+   std::string mot_genere = contenu_fichier [rd () % taille_fichier];
 
-   char caractere_act = ' ';
-
-   while (caractere_act != '\n')
-      dico.get (caractere_act);
-
-   std::string mot_genere;
-
-   dico >> mot_genere;
-
-   dico.close ();
-
-   std::cout << std::endl;
    return mot_genere;
 }
 
