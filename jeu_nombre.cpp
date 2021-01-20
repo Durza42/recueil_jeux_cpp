@@ -1,11 +1,8 @@
-
-bool continue_programe (const int reponse_joueur, const int nb_mystere);
-bool a_gagne (const int reponse_joueur, const int nombre_mystere);
-bool plus_petit (const int reponse_joueur, const int nombre_mystere);
-bool plus_grand (const int reponse_joueur, const int nombre_mystere);
-bool rejouer ();
-int demander_max ();
-int gen_nb_mystere (bool nb_j_is_2);
+#include "recueil.h"
+#include "pendu.h"
+#include "nomber_game.h"
+#include "melange_mot.h"
+#include "mastermind.h"
 
 
 int jeu_nombre (bool nb_joueurs_is_2 = false);

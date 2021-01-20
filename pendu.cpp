@@ -1,7 +1,8 @@
-
-std::string gen_mot_mystere (bool nb_j_is_2);
-bool a_gagne (const std::string& reponse_joueur, const std::string& mot_mystere);
-bool reaction (char reponse_joueur, const std::string& mot_mystere, std::string mot_trouve);
+#include "recueil.h"
+#include "pendu.h"
+#include "nomber_game.h"
+#include "melange_mot.h"
+#include "mastermind.h"
 
 
 int pendu (bool nb_joueurs_is_2 = false);

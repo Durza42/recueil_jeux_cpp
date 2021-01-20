@@ -7,16 +7,11 @@
 #include <vector>
 
 
-void print_menu ();
-void print_welkolm ();
-void clear_screen ();
-bool nb_p_is_2 ();
-
-
-#include "pendu.cpp"
-#include "nomber_game.cpp"
-#include "melange_mot.cpp"
-#include "mastermind.cpp"
+#include "recueil.h"
+#include "pendu.h"
+#include "nomber_game.h"
+#include "melange_mot.h"
+#include "mastermind.h"
 
 
 

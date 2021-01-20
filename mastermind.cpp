@@ -1,7 +1,8 @@
-
-std::string gen_code_mystere (bool nb_j_is_2);
-std::string reaction (const std::string& reponce_joueur, const std::string& code_mystere);
-bool code_pas_ok (const char code);
+#include "recueil.h"
+#include "pendu.h"
+#include "nomber_game.h"
+#include "melange_mot.h"
+#include "mastermind.h"
 
 
 int mastermind (bool nb_joueurs_is_2 = false);
